@@ -2,6 +2,7 @@ import math
 import numpy as np
 import math
 import file_import
+import line_melting
 
 def rotate(origin, point, angle):
     """
@@ -20,8 +21,8 @@ def rotate(origin, point, angle):
 class shape:
     def __init__(self):
         self.paths = [] #array of matplotlib.path
-        self.keep_matrix = None
-        self.coord_matrix = None
+        self.keep_matrix = None #matrix defining which mesh elements that should be kept
+        self.coord_matrix = None #matrix defining the coordinates of the mesh elements
     def generate_matrixes(self, spacing, size, angle=0):
         row_height = math.sqrt(3/4)*spacing
         points_x = math.floor(size/spacing)
@@ -45,17 +46,14 @@ class shape:
                     self.coord_matrix[ii][i] = complex(x,y)
     def check_keep_matrix(self):
         if len(self.paths)>0:
-            #print()
             flatten_keep = self.coord_matrix.flatten()
-            #print(flatten_keep)
             flatten_2D = np.column_stack((flatten_keep.real,flatten_keep.imag))
-            #print(flatten_2D)
             keep_array = file_import.check_points_in_path(self.paths,flatten_2D)
             self.keep_matrix = keep_array.reshape(self.keep_matrix.shape)
 
-
 class layer:
-    None
+    def __init__(self):
+        self.shapes = [] #array of shape objects
 
 class part:
     None
@@ -68,3 +66,5 @@ svg_path = file_import.import_svg_layer(file_path)
 matplot_path = file_import.svgpath_to_matplotpath(svg_path)
 new_shape.paths = matplot_path
 new_shape.check_keep_matrix()
+lines = line_melting.line_snake(new_shape)
+print(lines)
