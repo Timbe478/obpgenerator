@@ -1,3 +1,14 @@
+import obplib
+
+def generate_obp_points(line_coords):
+    line_points = []
+    for coord in line_coords:
+        start_point = obplib.Point(coord[0].real*1000, coord[0].imag*1000)
+        end_point = obplib.Point(coord[1].real*1000, coord[1].imag*1000)
+        line_points.append([start_point,end_point])
+    return line_points
+        
+
 def find_firsts(row, order=1): #order = 1 meanse left to right, -1 means right to left
     first = []
     if order == 1:
@@ -49,7 +60,8 @@ def line_snake(shape):
             lasts = find_lasts(shape.keep_matrix[i],order=-1)
         for i in range(len(first)):
             lines.append((shape.coord_matrix[i][first[i]],shape.coord_matrix[i][lasts[i]]))
-    return lines
+    line_points = generate_obp_points(lines)
+    return line_points
 def line_left_right(shape):
     lines = []
     (x,y) = shape.keep_matrix.shape
@@ -67,6 +79,7 @@ def line_right_left(shape):
         lasts = find_lasts(shape.keep_matrix[i],order=-1)
         for i in range(len(first)):
             lines.append((shape.coord_matrix[i][first[i]],shape.coord_matrix[i][lasts[i]]))
-    return lines
+    line_points = generate_obp_points(lines)
+    return line_points
         
             
