@@ -18,13 +18,20 @@ def rotate(origin, point, angle):
     qy = oy + math.sin(angle) * (px - ox) + math.cos(angle) * (py - oy)
     return qx, qy
 
-class shape:
+class ManufacturingSetting:
+    def __init__(self):
+        pass
+class Shape:
     def __init__(self):
         self.paths = [] #array of matplotlib.path
         self.keep_matrix = None #matrix defining which mesh elements that should be kept
         self.coord_matrix = None #matrix defining the coordinates of the mesh elements
         self.obp_elements = [] #array with elements that build your obp file, contains arrays with 1, 2, or 4 obp.Points. 1 Point in array = obplib.TimedPoints, 2 points = obplib.Line, 4 points = obp.Curve
         self.nmb_of_scans = 1 #Number of times the shape should be scanned
+        #Base settings
+        self.spot_size = 1
+        self.beam_power = 1500
+        self.dwell_time = 70000
 
     def generate_matrixes(self, spacing, size, angle=0):
         row_height = math.sqrt(3/4)*spacing
@@ -65,14 +72,14 @@ class shape:
         elif strategy == "right_to_left":
             lines = line_melting.line_right_left(self)
             self.obp_elements.append(lines)
-class layer:
+class Layer:
     def __init__(self):
         self.shapes = [] #array of shape objects
 
-class part:
+class Part:
     None
 
-new_shape = shape()
+new_shape = Shape()
 new_shape.generate_matrixes(1, 6, angle=0)
 
 file_path = r"C:\Users\antwi87\Downloads\testtest.svg"
