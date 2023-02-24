@@ -15,8 +15,6 @@ class ManufacturingSetting:
     beam_power = MyVar(1500) #[W]
     scan_speed = MyVar(1) #[micrometers/second] 
     dwell_time = MyVar(1) #[ns]
-    def __init__(self):
-        pass
     def get_beam_parameters(self):
         return obp.Beamparameters(self.spot_size.value, self.beam_power.value)
     def set_spot_size(self,new_value,lower=None,upper=None):

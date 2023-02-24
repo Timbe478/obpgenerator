@@ -2,7 +2,6 @@ import obplib
 
 def generate_obp_points(line_coords):
     line_points = []
-    print(line_coords)
     for coord in line_coords:
         start_point = obplib.Point(coord[0].real*1000, coord[0].imag*1000)
         end_point = obplib.Point(coord[1].real*1000, coord[1].imag*1000)
@@ -49,38 +48,38 @@ def find_lasts(row,order=1):
                     lasts.append(i)
     return lasts
 
-def line_snake(shape):
+def line_snake(keep_matrix,coord_matrix):
     lines = []
-    (x,y) = shape.keep_matrix.shape
+    (x,y) = keep_matrix.shape
     for i in range(x):
         if (i % 2) == 0:
-            first = find_firsts(shape.keep_matrix[i])
-            lasts = find_lasts(shape.keep_matrix[i])
+            first = find_firsts(keep_matrix[i])
+            lasts = find_lasts(keep_matrix[i])
         else:
-            first = find_firsts(shape.keep_matrix[i],order=-1)
-            lasts = find_lasts(shape.keep_matrix[i],order=-1)
+            first = find_firsts(keep_matrix[i],order=-1)
+            lasts = find_lasts(keep_matrix[i],order=-1)
         for ii in range(len(first)):
-            lines.append((shape.coord_matrix[i][first[ii]],shape.coord_matrix[i][lasts[ii]]))
+            lines.append((coord_matrix[i][first[ii]],coord_matrix[i][lasts[ii]]))
     line_points = generate_obp_points(lines)
     return line_points
-def line_left_right(shape):
+def line_left_right(keep_matrix,coord_matrix):
     lines = []
-    (x,y) = shape.keep_matrix.shape
+    (x,y) = keep_matrix.shape
     for i in range(x):
-        first = find_firsts(shape.keep_matrix[i])
-        lasts = find_lasts(shape.keep_matrix[i])
+        first = find_firsts(keep_matrix[i])
+        lasts = find_lasts(keep_matrix[i])
         for ii in range(len(first)):
-            lines.append((shape.coord_matrix[i][first[ii]],shape.coord_matrix[i][lasts[ii]]))
+            lines.append((coord_matrix[i][first[ii]],coord_matrix[i][lasts[ii]]))
     line_points = generate_obp_points(lines)
     return line_points
-def line_right_left(shape):
+def line_right_left(keep_matrix,coord_matrix):
     lines = []
-    (x,y) = shape.keep_matrix.shape
+    (x,y) = keep_matrix.shape
     for i in range(x):
-        first = find_firsts(shape.keep_matrix[i],order=-1)
-        lasts = find_lasts(shape.keep_matrix[i],order=-1)
+        first = find_firsts(keep_matrix[i],order=-1)
+        lasts = find_lasts(keep_matrix[i],order=-1)
         for ii in range(len(first)):
-            lines.append((shape.coord_matrix[i][first[ii]],shape.coord_matrix[i][lasts[ii]]))
+            lines.append((coord_matrix[i][first[ii]],coord_matrix[i][lasts[ii]]))
     line_points = generate_obp_points(lines)
     return line_points
         

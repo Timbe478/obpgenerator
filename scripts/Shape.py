@@ -2,8 +2,7 @@ import math
 import numpy as np
 import math
 import file_import
-import line_melting
-import point_melting
+import shape_melting as melting
 import obplib as obp
 import manufacturing_settings as settings
 import generate_obp
@@ -29,10 +28,9 @@ class Shape:
     keep_matrix = None #matrix defining which mesh elements that should be kept
     coord_matrix = None #matrix defining the coordinates of the mesh elements
     obp_points = [] #array with elements that build your obp file, contains arrays with 1, 2, or 4 obp.Points. 1 Point in array = obplib.TimedPoints, 2 points = obplib.Line, 4 points = obp.Curve
-    nmb_of_scans = 1 #Number of times the shape should be scanned
     manufacturing_settings = settings.ManufacturingSetting() #Manufacturing settings
     obp_elements = [] #array with elements for exports
-
+    nmb_of_scans = 1 #number of times the shape should be scanned
     def generate_matrixes(self, spacing, size=150, angle=0): #spacing and size in mm, angle in degree 
         row_height = math.sqrt(3/4)*spacing
         points_x = math.floor(size/spacing)
@@ -61,6 +59,7 @@ class Shape:
             keep_array = file_import.check_points_in_path(self.paths,flatten_2D)
             self.keep_matrix = keep_array.reshape(self.keep_matrix.shape)
     def generate_obp_elements(self):
+        None
         same_elements = []
         self.obp_elements = []
         for i, element in enumerate(self.obp_points):
@@ -74,48 +73,31 @@ class Shape:
                 elif len(same_elements[0]) == 4:
                     self.obp_elements = self.obp_elements + generate_obp.generate_curves(same_elements,self.manufacturing_settings)
                 same_elements = [element]
-    def export_obp(self, filename):
-        self.generate_obp_elements()
-        obp.write_obp(self.obp_elements, filename)
-    def export_obpj(self,filename):
-        self.generate_obp_elements()
-        obp.write_obpj(self.obp_elements, filename)
-    def line_melt(self,strategy ="snake"):
-        if strategy == "snake":
-            lines = line_melting.line_snake(self)
-            self.obp_points = self.obp_points + lines
-        elif strategy == "left_to_right":
-            lines = line_melting.line_left_right(self)
-            self.obp_points = self.obp_points + lines
-        elif strategy == "right_to_left":
-            lines = line_melting.line_right_left(self)
-            self.obp_points = self.obp_points + lines
-    def point_melt(self, strategy="random", settings=[]):
-        if strategy == "random":
-            points = point_melting.point_random(self)
-            self.obp_points = self.obp_points + points
-class Layer:
-    shapes = [] #array of Shape objects
-    def __init__(self):
-        None
+    def generate_melt_strategy(self,strategy,settings=[]):
+        points = melting.melt(self.keep_matrix,self.coord_matrix,strategy,settings=settings)
+        self.obp_points = self.obp_points + points
+
+
+    
 class Part:
     None
 
 new_shape = Shape()
 new_shape.generate_matrixes(1,size=20)
-file_path = r"C:\Users\antwi87\Documents\GitHub\obpgenerator\src\testfiles\simple_cube_10_10.svg"
-#file_path = r"C:\Users\antwi87\Downloads\testtest.svg"
+#file_path = r"C:\Users\antwi87\Documents\GitHub\obpgenerator\src\testfiles\simple_cube_10_10.svg"
+file_path = r"C:\Users\antwi87\Downloads\testtest.svg"
 svg_path = file_import.import_svg_layer(file_path)
 matplot_path = file_import.svgpath_to_matplotpath(svg_path)
 new_shape.paths = matplot_path
 new_shape.check_keep_matrix()
 
 #new_shape.line_melt(strategy="left_to_right")
-new_shape.point_melt()
-#new_shape.generate_obp_elements()
+new_shape.generate_melt_strategy(strategy="line_right_to_left")
+new_shape.generate_obp_elements()
+obp.write_obp(new_shape.obp_elements, r"C:\Users\antwi87\Downloads\testtest.obp")
 #with np.printoptions(threshold=np.inf):
 #    print(new_shape.keep_matrix.astype('int'))
-#    print(new_shape.coord_matrix)
+#    print(len(new_shape.obp_points))
 
-new_shape.export_obp(r"C:\Users\antwi87\Downloads\testtest.obp")
+#new_shape.export_obp(r"C:\Users\antwi87\Downloads\testtest.obp")
 
