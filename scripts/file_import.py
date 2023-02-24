@@ -2,7 +2,6 @@ from svgpathtools import svg2paths
 import xml.etree.ElementTree as ET
 import numpy as np
 import matplotlib.path as mpltPath
-from svgpath2mpl import parse_path
 
 def import_svg_part(file_path): #imports an svg file (path) containing MULTIPLE layers
     tree = ET.parse(file_path)

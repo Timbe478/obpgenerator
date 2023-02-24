@@ -90,6 +90,9 @@ class Shape:
         elif strategy == "right_to_left":
             lines = line_melting.line_right_left(self)
             self.obp_points = self.obp_points + lines
+    def point_melt(self, strategy="random", settings=[]):
+        if strategy == "random":
+            None
 class Layer:
     def __init__(self):
         self.shapes = [] #array of shape objects
@@ -98,13 +101,18 @@ class Part:
 
 new_shape = Shape()
 new_shape.generate_matrixes(1,size=20)
-file_path = r"C:\Users\antwi87\Downloads\testtest.svg"
+file_path = r"C:\Users\antwi87\Documents\GitHub\obpgenerator\src\testfiles\simple_cube_10_10.svg"
+#file_path = r"C:\Users\antwi87\Downloads\testtest.svg"
 svg_path = file_import.import_svg_layer(file_path)
 matplot_path = file_import.svgpath_to_matplotpath(svg_path)
 new_shape.paths = matplot_path
 new_shape.check_keep_matrix()
 
-new_shape.line_melt()
+new_shape.line_melt(strategy="left_to_right")
+
+#with np.printoptions(threshold=np.inf):
+#    print(new_shape.keep_matrix.astype('int'))
+#    print(new_shape.coord_matrix)
 
 new_shape.export_obp(r"C:\Users\antwi87\Downloads\testtest.obp")
 
