@@ -3,6 +3,7 @@ import numpy as np
 import math
 import file_import
 import line_melting
+import point_melting
 import obplib as obp
 import manufacturing_settings as settings
 import generate_obp
@@ -24,14 +25,13 @@ def rotate(origin, point, angle):
 
 
 class Shape:
-    def __init__(self):
-        self.paths = [] #array of matplotlib.path
-        self.keep_matrix = None #matrix defining which mesh elements that should be kept
-        self.coord_matrix = None #matrix defining the coordinates of the mesh elements
-        self.obp_points = [] #array with elements that build your obp file, contains arrays with 1, 2, or 4 obp.Points. 1 Point in array = obplib.TimedPoints, 2 points = obplib.Line, 4 points = obp.Curve
-        self.nmb_of_scans = 1 #Number of times the shape should be scanned
-        self.manufacturing_settings = settings.ManufacturingSetting() #Manufacturing settings
-        self.obp_elements = [] #array with elements for exports
+    paths = [] #array of matplotlib.path
+    keep_matrix = None #matrix defining which mesh elements that should be kept
+    coord_matrix = None #matrix defining the coordinates of the mesh elements
+    obp_points = [] #array with elements that build your obp file, contains arrays with 1, 2, or 4 obp.Points. 1 Point in array = obplib.TimedPoints, 2 points = obplib.Line, 4 points = obp.Curve
+    nmb_of_scans = 1 #Number of times the shape should be scanned
+    manufacturing_settings = settings.ManufacturingSetting() #Manufacturing settings
+    obp_elements = [] #array with elements for exports
 
     def generate_matrixes(self, spacing, size=150, angle=0): #spacing and size in mm, angle in degree 
         row_height = math.sqrt(3/4)*spacing
@@ -68,7 +68,7 @@ class Shape:
                 same_elements.append(element)
             if len(element) != len(same_elements[0]) or i == len(self.obp_points)-1:
                 if len(same_elements[0]) == 1:
-                    self.obp_elements = self.obp_elements + generate_obp.generate_points(same_elements,self.manufacturing_settings)
+                    self.obp_elements = self.obp_elements + [generate_obp.generate_points(same_elements,self.manufacturing_settings)]
                 elif len(same_elements[0]) == 2:
                     self.obp_elements = self.obp_elements + generate_obp.generate_lines(same_elements,self.manufacturing_settings)
                 elif len(same_elements[0]) == 4:
@@ -92,10 +92,12 @@ class Shape:
             self.obp_points = self.obp_points + lines
     def point_melt(self, strategy="random", settings=[]):
         if strategy == "random":
-            None
+            points = point_melting.point_random(self)
+            self.obp_points = self.obp_points + points
 class Layer:
+    shapes = [] #array of Shape objects
     def __init__(self):
-        self.shapes = [] #array of shape objects
+        None
 class Part:
     None
 
@@ -108,8 +110,9 @@ matplot_path = file_import.svgpath_to_matplotpath(svg_path)
 new_shape.paths = matplot_path
 new_shape.check_keep_matrix()
 
-new_shape.line_melt(strategy="left_to_right")
-
+#new_shape.line_melt(strategy="left_to_right")
+new_shape.point_melt()
+#new_shape.generate_obp_elements()
 #with np.printoptions(threshold=np.inf):
 #    print(new_shape.keep_matrix.astype('int'))
 #    print(new_shape.coord_matrix)
