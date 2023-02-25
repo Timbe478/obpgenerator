@@ -21,8 +21,6 @@ def rotate(origin, point, angle):
     qy = oy + math.sin(angle) * (px - ox) + math.cos(angle) * (py - oy)
     return qx, qy
 
-
-
 class Shape:
     paths = [] #array of matplotlib.path
     keep_matrix = None #matrix defining which mesh elements that should be kept
@@ -30,7 +28,10 @@ class Shape:
     obp_points = [] #array with elements that build your obp file, contains arrays with 1, 2, or 4 obp.Points. 1 Point in array = obplib.TimedPoints, 2 points = obplib.Line, 4 points = obp.Curve
     manufacturing_settings = settings.ManufacturingSetting() #Manufacturing settings
     obp_elements = [] #array with elements for exports
+    melt_strategy = "point_random" #melting strategy
+    melt_settings = dict() #melting settings
     nmb_of_scans = 1 #number of times the shape should be scanned
+
     def generate_matrixes(self, spacing, size=150, angle=0): #spacing and size in mm, angle in degree 
         row_height = math.sqrt(3/4)*spacing
         points_x = math.floor(size/spacing)
@@ -52,12 +53,14 @@ class Shape:
                     if angle != 0:
                         x,y = rotate((0,0),(x,y),angle)
                     self.coord_matrix[ii][i] = complex(x,y)
+    
     def check_keep_matrix(self):
         if len(self.paths)>0:
             flatten_keep = self.coord_matrix.flatten()
             flatten_2D = np.column_stack((flatten_keep.real,flatten_keep.imag))
             keep_array = file_import.check_points_in_path(self.paths,flatten_2D)
             self.keep_matrix = keep_array.reshape(self.keep_matrix.shape)
+
     def generate_obp_elements(self):
         None
         same_elements = []
@@ -73,14 +76,18 @@ class Shape:
                 elif len(same_elements[0]) == 4:
                     self.obp_elements = self.obp_elements + generate_obp.generate_curves(same_elements,self.manufacturing_settings)
                 same_elements = [element]
-    def generate_melt_strategy(self,strategy,settings=[]):
+            
+    def generate_melt_strategy(self,strategy=None,settings=None):
+        if strategy is None:
+            strategy = self.melt_strategyS
+        if settings is None:
+            settings = self.melt_settings
         points = melting.melt(self.keep_matrix,self.coord_matrix,strategy,settings=settings)
         self.obp_points = self.obp_points + points
 
 
     
-class Part:
-    None
+
 
 new_shape = Shape()
 new_shape.generate_matrixes(1,size=20)
