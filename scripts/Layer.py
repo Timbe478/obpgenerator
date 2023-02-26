@@ -1,5 +1,6 @@
 import layer_sorting as sorting
 import obplib as obp
+import Shape
 
 class Layer:
     shapes = [] #array of Shape objects
@@ -40,6 +41,24 @@ class Layer:
         for i in range(len(self.shapes)):
             self.shapes[i].melt_strategy = melt_strategies[i]
     
+    def set_shapes(self, spacing, size, angle):
+        if not type(spacing) is list:
+            spacing = [spacing]*len(self.shapes)
+        elif not len(spacing) == len(self.shapes):
+            spacing = [spacing[0]]*len(self.shapes)
+        if not type(size) is list:
+            size = [size]*len(self.shapes)
+        elif not len(size) == len(self.shapes):
+            size = [size[0]]*len(self.shapes)
+        if not type(angle) is list:
+            angle = [angle]*len(self.shapes)
+        elif not len(angle) == len(self.shapes):
+            angle = [angle[0]]*len(self.shapes)
+
+        for i in range(len(self.shapes)):
+            self.shapes[i].generate_matrixes(spacing[i], size[i], angle[i])
+            self.shapes[i].check_keep_matrix()
+
     def sort_layers(self, strategy=None,settings=None):
         if strategy is None:
             strategy = self.sorting_strategy
@@ -47,6 +66,8 @@ class Layer:
             settings = self.sorting_settings
         self.shapes_to_export = sorting.sort(self.shapes,strategy=strategy,settings=settings)
 
+    def import_svg_layer(self, path):
+        pass
 
         
 
