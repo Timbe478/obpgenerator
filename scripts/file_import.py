@@ -3,7 +3,15 @@ import xml.etree.ElementTree as ET
 import numpy as np
 import matplotlib.path as mpltPath
 
-def import_svg_part(file_path): #imports an svg file (path) containing MULTIPLE layers
+def import_svg_layer(file_path):#imports an svg file (path) containing ONE layer
+    svg_paths = import_svg(file_path)
+    matplotpaths = []
+    for path in svg_paths:
+        matplotpath = svgpath_to_matplotpath(path)
+        matplotpaths.append(matplotpath)
+    return matplotpaths
+
+def import_svg(file_path): #imports an svg file (path)
     tree = ET.parse(file_path)
     root = tree.getroot()
     groups = root.findall(r"{http://www.w3.org/2000/svg}g")
@@ -17,9 +25,7 @@ def import_svg_part(file_path): #imports an svg file (path) containing MULTIPLE 
             i = i + 1
         svg_layers.insert(0,local_layer)
     return svg_layers
-def import_svg_layer(file_path):#imports an svg file (path) containing ONE layer
-    svg_layer, attributes  = svg2paths(file_path)
-    return svg_layer
+
 def svgpath_to_matplotpath(svg_paths):
     matplotpaths = []
     for path in svg_paths:
@@ -39,15 +45,8 @@ def check_points_in_path(matplotpaths, points):
     return inside_all
 
 
-#file_path = r"C:\Users\antwi87\Documents\GitHub\obpgenerator-1\src\testfiles\test_fork.svg"
-#file_path = r"C:\Users\antwi87\Downloads\testtest.svg"
-#svg_path = import_svg_layer(file_path)
-#matplot_path = svgpath_to_matplotpath(svg_path)
-#points = np.random.rand(2,2)
-#print(points)
-#inside = check_points_in_path(matplot_path,points)
-#print(inside)
-
+file_path = r"C:\Users\antwi87\Downloads\drawing-2.svg"
+t = import_svg_layer(file_path)
 
 
 
