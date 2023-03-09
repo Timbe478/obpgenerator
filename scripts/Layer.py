@@ -66,7 +66,7 @@ class Layer:
             settings = self.sorting_settings
         self.shapes_to_export = sorting.sort(self.shapes,strategy=strategy,settings=settings)
 
-    def import_svg_layer(self, path):
+    def import_svg_layer(self, path, as_one_shape = True):
         pass
 
         
