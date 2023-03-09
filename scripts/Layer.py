@@ -1,6 +1,7 @@
 import layer_sorting as sorting
 import obplib as obp
 import Shape
+import file_import
 
 class Layer:
     shapes = [] #array of Shape objects
@@ -41,7 +42,7 @@ class Layer:
         for i in range(len(self.shapes)):
             self.shapes[i].melt_strategy = melt_strategies[i]
     
-    def set_shapes(self, spacing, size, angle):
+    def set_shapes(self, spacing, size=300, angle=0):
         if not type(spacing) is list:
             spacing = [spacing]*len(self.shapes)
         elif not len(spacing) == len(self.shapes):
@@ -58,6 +59,10 @@ class Layer:
         for i in range(len(self.shapes)):
             self.shapes[i].generate_matrixes(spacing[i], size[i], angle[i])
             self.shapes[i].check_keep_matrix()
+            import numpy as np
+            x = self.shapes[i].keep_matrix
+            nonZero = np.count_nonzero(x == 2)
+            #print(nonZero)
 
     def sort_layers(self, strategy=None,settings=None):
         if strategy is None:
@@ -66,8 +71,27 @@ class Layer:
             settings = self.sorting_settings
         self.shapes_to_export = sorting.sort(self.shapes,strategy=strategy,settings=settings)
 
-    def import_svg_layer(self, path, as_one_shape = True):
-        pass
+    def import_svg_layer(self, path):
+        matplot_paths = file_import.import_svg_layer(path)
+        for path in matplot_paths:
+            new_shape = Shape.Shape()
+            new_shape.paths = path
+            self.shapes.append(new_shape)
+
+
+file_path = r"C:\Users\antwi87\Downloads\drawing-4.svg"
+file_path2 = r"C:\Users\antwi87\Downloads\drawing-2.obp"
+newLayer = Layer()
+newLayer.import_svg_layer(file_path)
+newLayer.set_shapes(1)
+newLayer.export_obp(file_path2)
+#file_path = r"C:\Users\antwi87\Downloads\drawing-3.svg"
+#file_path2 = r"C:\Users\antwi87\Downloads\drawing-2.obpj"
+#newLayer = Layer()
+#newLayer.import_svg_layer(file_path)
+#newLayer.set_shapes(1)
+#newLayer.export_obpj(file_path2)
+
 
         
 
