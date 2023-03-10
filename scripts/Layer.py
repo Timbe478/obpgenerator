@@ -42,6 +42,14 @@ class Layer:
         for i in range(len(self.shapes)):
             self.shapes[i].melt_strategy = melt_strategies[i]
     
+    def set_nmb_of_scans(self, nmb_of_scans):
+        if not type(nmb_of_scans) is list:
+            nmb_of_scans = [nmb_of_scans]*len(self.shapes)
+        elif not len(nmb_of_scans) == len(self.shapes):
+            nmb_of_scans = [nmb_of_scans[0]]*len(self.shapes)
+        for i in range(len(self.shapes)):
+            self.shapes[i].nmb_of_scans = nmb_of_scans[i]
+
     def set_shapes(self, spacing, size=300, angle=0):
         if not type(spacing) is list:
             spacing = [spacing]*len(self.shapes)
