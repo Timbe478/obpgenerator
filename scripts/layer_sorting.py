@@ -20,6 +20,7 @@ def shapes_first(shapes):
 def alternate_shapes(shapes):
     shape_order = []
     max_scans = 0
+    print("The setting alternate shapes is not fully implemented yet")
     for shape in shapes:
         if shape.nmb_of_scans > max_scans:
             max_scans=shape.nmb_of_scans

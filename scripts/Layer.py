@@ -92,6 +92,9 @@ file_path2 = r"C:\Users\antwi87\Downloads\drawing-2.obp"
 newLayer = Layer()
 newLayer.import_svg_layer(file_path)
 newLayer.set_shapes(1)
+newLayer.set_melt_strategies("line_right_to_left")
+newLayer.set_nmb_of_scans(2)
+newLayer.sorting_strategy = "ramp_manufacturing_settings"
 newLayer.export_obp(file_path2)
 #file_path = r"C:\Users\antwi87\Downloads\drawing-3.svg"
 #file_path2 = r"C:\Users\antwi87\Downloads\drawing-2.obpj"
