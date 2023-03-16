@@ -2,7 +2,5 @@ svgpathtools
 numpy
 matplotlib
 obplib
-copy
-math 
 pyvista
 svgwrite
