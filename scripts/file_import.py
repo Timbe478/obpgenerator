@@ -36,6 +36,7 @@ def svgpath_to_matplotpath(svg_paths):
         new_path = mpltPath.Path(new_path_points)
         matplotpaths.append(new_path)
     return matplotpaths
+
 def check_points_in_path(matplotpaths, points):
     #points N*2 numpy array
     inside_all = np.full((len(points),), False)
