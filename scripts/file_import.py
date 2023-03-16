@@ -45,8 +45,7 @@ def check_points_in_path(matplotpaths, points):
     return inside_all
 
 
-#file_path = r"C:\Users\antwi87\Downloads\drawing-2.svg"
-#t = import_svg_layer(file_path)
+
 
 
 

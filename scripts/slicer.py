@@ -33,14 +33,6 @@ def polydata_to_pyvista():
     p1.add_legend()
     p1.save_graphic('test.svg', raster=False)
 
-path = r"C:\Users\antwi87\Documents\GitHub\obpgenerator-1\src\testfiles\test_fork.stl"
-temp = r"C:\Users\antwi87\Downloads\svg_files"
 
-slices = slice_stl(path)
-paths = slices[9].points
-print(paths)
-print(slices[0].lines)
-#print(slices[0].lines)
-#export_stl(slices, temp)
 
 
