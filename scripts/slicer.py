@@ -50,7 +50,6 @@ def create_matplot_path(list_layer):
 
     return path
         
-
 def calc_layer_coordinates(layer): #Convert a pv polydata layer to an array with coordinates
     layer_connections = layer.lines
     layer_points = layer.points
@@ -83,7 +82,3 @@ def slice_stl(path, layer_height):
 
 
 
-
-
-slices = slice_stl(r"C:\Users\antwi87\Downloads\cube.stl",0.2)
-print(slices)
