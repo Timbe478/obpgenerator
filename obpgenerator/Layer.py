@@ -1,7 +1,6 @@
 import obpgenerator.layer_sorting as sorting
 import obplib as obp
 import obpgenerator.Shape as Shape
-import obpgenerator.file_import as file_import
 
 class Layer:
     shapes = [] #array of Shape objects

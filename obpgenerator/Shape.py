@@ -1,6 +1,5 @@
 import math 
 import numpy as np
-import math
 import obpgenerator.shape_melting as melting
 import obplib as obp
 import obpgenerator.manufacturing_settings as settings

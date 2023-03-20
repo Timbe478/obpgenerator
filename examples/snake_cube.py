@@ -1,15 +1,8 @@
-from obpgenerator.Layer import Layer
-#from obpgenerator.layer_sorting import sort
-file_path = r"layer_nine_cubes.svg"
+import obpgenerator
 
-#newLayer = Layer.Layer()
-#newLayer.import_svg_layer(file_path)
-#newLayer.set_shapes(1)
-#newLayer.set_melt_strategies("line_right_to_left")
-#newLayer.set_nmb_of_scans(2)
-#newLayer.sorting_strategy = "ramp_manufacturing_settings"
-
-
-#file_path2 = r"C:\Users\antwi87\Downloads\drawing-2.obp"
-
-#newLayer.export_obp(file_path2)
+file_path = "examples\layer_nine_cubes.svg"
+paths = obpgenerator.file_import.import_svg_layer(file_path)
+my_layer = obpgenerator.Layer.Layer()
+my_layer.create_from_mplt_paths(paths)
+my_layer.set_shapes(1)
+my_layer.export_obpj("output.obpj")

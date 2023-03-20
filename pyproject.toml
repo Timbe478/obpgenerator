@@ -3,8 +3,8 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "obpgeneratortest"
-version = "0.0.2"
+name = "obpgenerator"
+version = "0.0.10"
 authors = [
   { name="Anton Wiberg" },
 ]
