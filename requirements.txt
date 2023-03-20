@@ -1,9 +1,0 @@
-svgpathtools
-numpy
-obplib
-pyvista
-svgwrite
-xml
-matplotlib
-copy
-math
