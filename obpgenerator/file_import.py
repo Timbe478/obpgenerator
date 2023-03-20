@@ -37,13 +37,6 @@ def svgpath_to_matplotpath(svg_paths):
         matplotpaths.append(new_path)
     return matplotpaths
 
-def check_points_in_path(matplotpaths, points):
-    #points N*2 numpy array
-    inside_all = np.full((len(points),), False)
-    for path in matplotpaths:
-        inside = path.contains_points(points)
-        inside_all = np.logical_or(inside_all, inside)
-    return inside_all
 
 
 

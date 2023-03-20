@@ -1,5 +1,5 @@
 import obplib as obp
-import manufacturing_settings as settings
+import obpgenerator.manufacturing_settings as settings
 
 def generate_lines(elements,set):
     lines = []

@@ -1,7 +1,7 @@
-import layer_sorting as sorting
+import obpgenerator.layer_sorting as sorting
 import obplib as obp
-import Shape
-import file_import
+import obpgenerator.Shape as Shape
+import obpgenerator.file_import as file_import
 
 class Layer:
     shapes = [] #array of Shape objects
@@ -79,8 +79,7 @@ class Layer:
             settings = self.sorting_settings
         self.shapes_to_export = sorting.sort(self.shapes,strategy=strategy,settings=settings)
 
-    def import_svg_layer(self, path):
-        matplot_paths = file_import.import_svg_layer(path)
+    def create_from_mplt_paths(self, matplot_paths):
         for path in matplot_paths:
             new_shape = Shape.Shape()
             new_shape.paths = path

@@ -1,11 +1,10 @@
 import math 
 import numpy as np
 import math
-import file_import
-import shape_melting as melting
+import obpgenerator.shape_melting as melting
 import obplib as obp
-import manufacturing_settings as settings
-import generate_obp
+import obpgenerator.manufacturing_settings as settings
+import obpgenerator.generate_obp as generate_obp
 
 def rotate(origin, point, angle):
     """
@@ -20,6 +19,14 @@ def rotate(origin, point, angle):
     qx = ox + math.cos(angle) * (px - ox) - math.sin(angle) * (py - oy)
     qy = oy + math.sin(angle) * (px - ox) + math.cos(angle) * (py - oy)
     return qx, qy
+
+def check_points_in_path(matplotpaths, points):
+    #points N*2 numpy array
+    inside_all = np.full((len(points),), False)
+    for path in matplotpaths:
+        inside = path.contains_points(points)
+        inside_all = np.logical_or(inside_all, inside)
+    return inside_all
 
 class Shape:
     paths = [] #array of matplotlib.path
@@ -58,7 +65,7 @@ class Shape:
         if len(self.paths)>0:
             flatten_keep = self.coord_matrix.flatten()
             flatten_2D = np.column_stack((flatten_keep.real,flatten_keep.imag))
-            keep_array = file_import.check_points_in_path(self.paths,flatten_2D)
+            keep_array = check_points_in_path(self.paths,flatten_2D)
             self.keep_matrix = keep_array.reshape(self.keep_matrix.shape)
 
     def generate_obp_elements(self):

@@ -1,5 +1,5 @@
-import melt_strategies.line_melting as line_melting
-import melt_strategies.point_melting as point_melting
+import obpgenerator.melt_strategies.line_melting as line_melting
+import obpgenerator.melt_strategies.point_melting as point_melting
 
 def melt(keep_matrix,coord_matrix,strategy,settings=dict()):
     obp_points = []
