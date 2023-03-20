@@ -1,2 +1,2 @@
 class Part:
-    None
+    layers = [] #list of Layers
