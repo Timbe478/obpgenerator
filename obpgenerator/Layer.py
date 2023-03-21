@@ -1,6 +1,7 @@
 import obpgenerator.layer_sorting as sorting
 import obplib as obp
 import obpgenerator.Shape as Shape
+import numpy as np
 
 class Layer:
     shapes = [] #array of Shape objects
@@ -66,7 +67,7 @@ class Layer:
         for i in range(len(self.shapes)):
             self.shapes[i].generate_matrixes(spacing[i], size[i], angle[i])
             self.shapes[i].check_keep_matrix()
-            import numpy as np
+            
             x = self.shapes[i].keep_matrix
             nonZero = np.count_nonzero(x == 2)
             #print(nonZero)
