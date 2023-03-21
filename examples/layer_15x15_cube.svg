@@ -25,52 +25,28 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="0.70199214"
-     inkscape:cx="264.24797"
-     inkscape:cy="-186.61178"
+     inkscape:cx="120.37172"
+     inkscape:cy="1066.9635"
      inkscape:window-width="1920"
-     inkscape:window-height="986"
-     inkscape:window-x="-11"
-     inkscape:window-y="-11"
+     inkscape:window-height="1137"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1-1" />
+     inkscape:current-layer="layer1-1-3" />
   <defs
      id="defs2" />
   <g
      inkscape:label="Lager 1"
      inkscape:groupmode="layer"
-     id="layer1-1"
-     transform="translate(0.18845185,27.137055)">
+     id="layer1-1-3"
+     transform="translate(0,0)">
     <rect
        style="fill:none;stroke:#000000;stroke-width:0.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="rect234-2"
+       id="rect234-1-4-63"
        width="15"
        height="15"
-       x="-21.445431"
-       y="-19.937817"
-       inkscape:label="cube" />
-    <rect
-       style="fill:none;stroke:#000000;stroke-width:0.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="rect234-1-4"
-       width="15"
-       height="15"
-       x="9.46066"
-       y="-19.937817"
-       inkscape:label="cube" />
-    <rect
-       style="fill:none;stroke:#000000;stroke-width:0.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="rect234-2-4"
-       width="15"
-       height="15"
-       x="-20.691624"
-       y="-47.451778"
-       inkscape:label="cube" />
-    <rect
-       style="fill:none;stroke:#000000;stroke-width:0.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="rect234-1-4-6"
-       width="15"
-       height="15"
-       x="10.21447"
-       y="-47.451778"
+       x="-7.5"
+       y="-7.5"
        inkscape:label="cube" />
   </g>
 </svg>

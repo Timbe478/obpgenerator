@@ -45,7 +45,7 @@
        width="10"
        height="10"
        x="-25"
-       y="15"
+       y="25"
        inkscape:label="cube_1_1" />
   </g>
   <g
@@ -58,7 +58,7 @@
        width="10"
        height="10"
        x="-5"
-       y="15"
+       y="25"
        inkscape:label="cube_1_2" />
   </g>
   <g
@@ -71,7 +71,7 @@
        width="10"
        height="10"
        x="15"
-       y="15"
+       y="25"
        inkscape:label="cube_1_3" />
   </g>
   <g
@@ -84,7 +84,7 @@
        width="10"
        height="10"
        x="-25"
-       y="-5"
+       y="5"
        inkscape:label="cube_2_1" />
   </g>
   <g
@@ -97,7 +97,7 @@
        width="10"
        height="10"
        x="-5"
-       y="-5"
+       y="5"
        inkscape:label="cube_2_2" />
   </g>
   <g
@@ -110,7 +110,7 @@
        width="10"
        height="10"
        x="15"
-       y="-5"
+       y="5"
        inkscape:label="cube_2_3" />
   </g>
 <g
@@ -123,7 +123,7 @@
        width="10"
        height="10"
        x="-25"
-       y="-25"
+       y="-30"
        inkscape:label="cube_3_1" />
   </g>
   <g
@@ -136,7 +136,7 @@
        width="10"
        height="10"
        x="-5"
-       y="-25"
+       y="-30"
        inkscape:label="cube_3_2" />
   </g>
   <g
@@ -149,7 +149,7 @@
        width="10"
        height="10"
        x="15"
-       y="-25"
+       y="-30"
        inkscape:label="cube_3_3" />
   </g>
 </svg>
