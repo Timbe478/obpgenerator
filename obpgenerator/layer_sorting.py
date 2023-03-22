@@ -39,7 +39,7 @@ def ramp_manufacturing_settings(shapes,settings):
     def create_ramp_vector(nmb_designs,lower,upper,value,ramp_setting):
         ramped_values = [value] * nmb_designs
         if ramp_setting != 0:
-            step = (upper-lower/(nmb_designs-1))
+            step = ((upper-lower)/(nmb_designs-1))
             for i in range(nmb_designs):
                 ramped_values[i] = lower+i*step
         if ramp_setting<0:

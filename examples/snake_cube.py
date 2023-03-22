@@ -14,8 +14,11 @@ manufacturing_settings.set_spot_size(0.1,lower=0.1,upper=1)
 manufacturing_settings.set_beam_power(1500,lower=1000,upper=2000)
 manufacturing_settings.set_scan_speed(1,lower=1,upper=2)
 manufacturing_settings.set_dwell_time(100,lower=50,upper=150)
+ramp_settings = dict(ramp_beam_power=1,ramp_dwell_time=0,ramp_scan_speed=0,ramp_spot_size=0)
+
 
 my_layer.set_manufacturing_settings(manufacturing_settings)
+my_layer.sorting_settings = ramp_settings
 my_layer.set_melt_strategies("line_snake")
 my_layer.set_nmb_of_scans(3)
 my_layer.sorting_strategy = "ramp_manufacturing_settings"
