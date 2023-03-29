@@ -50,27 +50,23 @@ class Layer:
         for i in range(len(self.shapes)):
             self.shapes[i].nmb_of_scans = nmb_of_scans[i]
 
-    def set_shapes(self, spacing, size=300, angle=0):
+    def set_shapes(self, spacing, size=150, angle=0):
         if not type(spacing) is list:
             spacing = [spacing]*len(self.shapes)
         elif not len(spacing) == len(self.shapes):
-            spacing = [spacing[0]]*len(self.shapes)
+            print("error in spacing length")
         if not type(size) is list:
             size = [size]*len(self.shapes)
         elif not len(size) == len(self.shapes):
-            size = [size[0]]*len(self.shapes)
+            print("error in size length")
         if not type(angle) is list:
             angle = [angle]*len(self.shapes)
         elif not len(angle) == len(self.shapes):
-            angle = [angle[0]]*len(self.shapes)
+            print("error in angle length")
 
         for i in range(len(self.shapes)):
             self.shapes[i].generate_matrixes(spacing[i], size[i], angle[i])
             self.shapes[i].check_keep_matrix()
-            
-            x = self.shapes[i].keep_matrix
-            nonZero = np.count_nonzero(x == 2)
-            #print(nonZero)
 
     def sort_layers(self, strategy=None,settings=None):
         if strategy is None:
@@ -79,7 +75,7 @@ class Layer:
             settings = self.sorting_settings
         self.shapes_to_export = sorting.sort(self.shapes,strategy=strategy,settings=settings)
 
-    def create_from_mplt_paths(self, matplot_paths):
+    def create_from_mplt_paths(self, matplot_paths): #matplot_paths should be array on form [[path1 path2],[path3]]
         for path in matplot_paths:
             new_shape = Shape.Shape()
             new_shape.paths = path
