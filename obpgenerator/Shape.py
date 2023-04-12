@@ -22,9 +22,15 @@ def rotate(origin, point, angle):
 def check_points_in_path(matplotpaths, points):
     #points N*2 numpy array
     inside_all = np.full((len(points),), False)
-    for path in matplotpaths:
-        inside = path.contains_points(points)
+
+    if type(matplotpaths) is list:
+        for path in matplotpaths:
+            inside = path.contains_points(points)
+            inside_all = np.logical_or(inside_all, inside)
+    else:
+        inside = matplotpaths.contains_points(points)
         inside_all = np.logical_or(inside_all, inside)
+    
     return inside_all
 
 class Shape:
