@@ -71,7 +71,7 @@ def slice_stl(path, layer_height):
     while z_pos < max_z:
         single_slice = mesh.slice(normal=[0, 0, 1],origin=(0,0,z_pos))
         mpl_path = py_to_mpl_path(single_slice)
-        slices.append(mpl_path)
+        slices.append([mpl_path])
         z_pos = z_pos + layer_height
     return slices
 

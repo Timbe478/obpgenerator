@@ -4,10 +4,11 @@ import obpgenerator.Shape as Shape
 import numpy as np
 
 class Layer:
-    shapes = [] #array of Shape objects
-    shapes_to_export = [] #array with sorted shapes to export
-    sorting_strategy = "shapes_first" #defines the order in which the shapes are manufactured
-    sorting_settings = dict() #appends settings to the sorting algorithm
+    def __init__(self):
+        self.shapes = [] #array of Shape objects
+        self.shapes_to_export = [] #array with sorted shapes to export
+        self.sorting_strategy = "shapes_first" #defines the order in which the shapes are manufactured
+        self.sorting_settings = dict() #appends settings to the sorting algorithm
 
     def create_obp_elements(self):
         self.sort_layers()
@@ -75,7 +76,8 @@ class Layer:
             settings = self.sorting_settings
         self.shapes_to_export = sorting.sort(self.shapes,strategy=strategy,settings=settings)
 
-    def create_from_mplt_paths(self, matplot_paths): #matplot_paths should be array on form [[path1 path2],[path3]]
+    def create_from_mplt_paths(self, matplot_paths): 
+        #matplot_paths should be array on form [[path1 path2],[path3]]
         for path in matplot_paths:
             new_shape = Shape.Shape()
             new_shape.paths = path

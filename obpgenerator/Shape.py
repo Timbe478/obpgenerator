@@ -34,15 +34,16 @@ def check_points_in_path(matplotpaths, points):
     return inside_all
 
 class Shape:
-    paths = [] #array of matplotlib.path
-    keep_matrix = None #matrix defining which mesh elements that should be kept
-    coord_matrix = None #matrix defining the coordinates of the mesh elements
-    obp_points = [] #array with elements that build your obp file, contains arrays with 1, 2, or 4 obp.Points. 1 Point in array = obplib.TimedPoints, 2 points = obplib.Line, 4 points = obp.Curve
-    manufacturing_settings = settings.ManufacturingSetting() #Manufacturing settings
-    obp_elements = [] #array with elements for exports
-    melt_strategy = "point_random" #melting strategy
-    melt_settings = dict() #melting settings
-    nmb_of_scans = 1 #number of times the shape should be scanned
+    def __init__(self):
+        self.paths = [] #array of matplotlib.path
+        self.keep_matrix = None #matrix defining which mesh elements that should be kept
+        self.coord_matrix = None #matrix defining the coordinates of the mesh elements
+        self.obp_points = [] #array with elements that build your obp file, contains arrays with 1, 2, or 4 obp.Points. 1 Point in array = obplib.TimedPoints, 2 points = obplib.Line, 4 points = obp.Curve
+        self.manufacturing_settings = settings.ManufacturingSetting() #Manufacturing settings
+        self.obp_elements = [] #array with elements for exports
+        self.melt_strategy = "point_random" #melting strategy
+        self.melt_settings = dict() #melting settings
+        self.nmb_of_scans = 1 #number of times the shape should be scanned
 
     def generate_matrixes(self, spacing, size=150, angle=0): #spacing and size in mm, angle in degree 
         row_height = math.sqrt(3/4)*spacing

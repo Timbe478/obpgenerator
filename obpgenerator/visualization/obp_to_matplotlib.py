@@ -1,25 +1,38 @@
-
+import obplib as obp
 from matplotlib.path import Path
-import matplotlib.pyplot as plt
-import matplotlib.path as mpath
 
-def create_line(start=(0.0,0.0),end=(1.0,1.0)):
-    radius = 0.1
-    
-    path1 = Path([[start[0],start[1]],[end[0],end[1]]])
-    path2 = Path.circle(center=start,radius=0.1)
-    t = path1.intersects_path(path2)
-    print(t)
-    line = path1.make_compound_path(path1,path2)
+
+
+def convert_line(element):
+    p1 = element.P1
+    p2 = element.P2
+    start=(p1.get_x()/1000,p1.get_y()/1000)
+    end=(p2.get_x()/1000,p2.get_y()/1000)
+    line = Path([[start[0],start[1]],[end[0],end[1]]])
     return line
 
-circle = Path.circle(center=(0.0, 0.0), radius=0.05)
-line = create_line()
+def convert_point(element):
+    points = element.points
+    circles = []
+    for point in points:
+        center=(point.get_x()/1000,point.get_y()/1000)
+        circle = Path.circle(center=center, radius=0.05)
+        circles.append(circle)
+    return circles
 
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
+def convert_arc(element):
+    return None
 
-#ax.plot(circle.vertices[:, 0], circle.vertices[:, 1], len(circle.vertices[:, 1])*[0])
-ax.plot(line.vertices[:, 0], line.vertices[:, 1], len(line.vertices[:, 1])*[0])
-
-plt.show()
+def obp_to_matplotlib(elements):
+    mtpl_elements = []
+    for element in elements:
+        if type(element) is obp.Line:
+            mtpl_element = convert_line(element)
+            mtpl_elements.append(mtpl_element)
+        elif type(element) is obp.TimedPoints:
+            mtpl_element = convert_point(element)
+            mtpl_elements = mtpl_element + mtpl_element
+        elif type(element) is obp.Curve:
+            mtpl_element = convert_arc(element)
+            mtpl_elements.append(mtpl_element)
+    return mtpl_elements

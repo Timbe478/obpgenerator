@@ -1,3 +1,4 @@
 from . import(
-    visualization
+    visualization,
+    obp_to_matplotlib
 )
