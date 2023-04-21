@@ -1,6 +1,6 @@
 import pyvista as pv
 from matplotlib.path import Path
-
+from io import StringIO
 
 def find_min_max_z(mesh): #Finds min and max point in the z-direction
       min_value = 0
@@ -61,9 +61,28 @@ def py_to_mpl_path(pv_path):
 
     return mpl_paths
 
+def combine_arrays(arrays):
+    #create a new array with matplotlibs which adds different sliced stl files into different shapes
 
-def slice_stl(path, layer_height):
-    mesh = pv.read(path)
+    numb_of_layers = 0 #Get the numb of layers based on the file with most layers
+    for array in arrays:
+        if len(array) > numb_of_layers:
+            numb_of_layers = len(array)
+
+    new_array = []
+    for i in range(numb_of_layers):
+        layer_array = []
+        for array in arrays:
+            if len(array)<=i:
+                layer_array.append([])
+            else:
+                layer_array.append(array[i][0])
+        new_array.append(layer_array)
+    
+    return new_array
+
+def slice_stl_file(stl_string, layer_height):
+    mesh = pv.read(stl_string)
     min_z, max_z = find_min_max_z(mesh)
     
     slices = []
@@ -74,5 +93,16 @@ def slice_stl(path, layer_height):
         slices.append([mpl_path])
         z_pos = z_pos + layer_height
     return slices
+
+
+def slice_stl(paths,layer_height):
+    if not type(paths) is list:
+        paths = [paths]
+    slices = []
+    for path in paths:
+       slices.append(slice_stl_file(path,layer_height))
+    combined_slices = combine_arrays(slices)
+    return combined_slices
+
 
 
