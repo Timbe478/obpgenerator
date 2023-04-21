@@ -92,7 +92,7 @@ class Part:
         for i in range(len(self.layers)):
             file_path = os.path.join(path, "layer"+str(i)+".obp")
             self.layers[i].export_obp(file_path)
-            build_file.append("      -\"" + "/obp_files/layer"+str(i)+".obp" + "\"")
+            build_file.append("      - \"" + "/obp_files/layer"+str(i)+".obp" + "\"")
         build_file.append("  layerfeed:")
         build_file.append("    build_piston_distance: " + str(self.layer_feed.build_piston_distance))
         build_file.append("    powder_piston_distance: " + str(self.layer_feed.powder_piston_distance))
