@@ -53,3 +53,9 @@ my_layer.sorting_strategy = "ramp_manufacturing_settings"
 
 my_layer.export_obp("output.obp")
 ```
+
+# To package
+- Delete old builds in the \dist folder 
+- Update the version in the setup.cfg file
+- run "python -m build"
+- upload to pip with "twine upload dist/*"
