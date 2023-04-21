@@ -17,7 +17,7 @@ import obpgenerator.slicer as slicer
 import obpgenerator.visualization.visualization as visualization
 import obpgenerator.manufacturing_settings as manufacturing_settings
 
-stl_file = r"C:\Users\antwi87\Documents\GitHub\obpgenerator\examples\two_cubes.stl"
+stl_file = r"\two_cubes.stl"
 slices = slicer.slice_stl(stl_file,1)
 my_part = Part.Part()
 my_part.create_from_mplt_paths(slices)
