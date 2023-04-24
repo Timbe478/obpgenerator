@@ -1,7 +1,5 @@
 import obpgenerator.Layer as Layer
 import os
-from collections import OrderedDict
-import yaml
 
 class Start_heat:
     def __init__(self):

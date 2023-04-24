@@ -1,6 +1,5 @@
 import pyvista as pv
 from matplotlib.path import Path
-from io import StringIO
 
 def find_min_max_z(mesh): #Finds min and max point in the z-direction
       min_value = 0
