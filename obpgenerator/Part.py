@@ -57,6 +57,29 @@ class Part:
             self.layers[i].sorting_strategy = sorting_strategy
             angle = angle + angle_between_layers
     
+    def set_settings(self, manufacturing_settings = None, melt_strategies=None, nmb_of_scans=None):
+        #Sets settings for each shape in each layer, the settings should be arrays where the first element in the array is assigned to the
+        #first shape in each layer, the second element to the second shape in each layer, and so on. If the array is shorter than the number
+        #number of shapes in a layer it will loop from the beginning in the array
+        if manufacturing_settings != None:
+            for layer in self.layers:
+                layer_settings = []
+                for idx in range(layer.shapes):
+                    layer_settings.append(manufacturing_settings[idx % len(manufacturing_settings)])
+                layer.set_manufacturing_settings(layer_settings)
+        if melt_strategies != None:
+            for layer in self.layers:
+                layer_settings = []
+                for idx in range(layer.shapes):
+                    layer_settings.append(melt_strategies[idx % len(melt_strategies)])
+                layer.set_melt_strategies(layer_settings)
+        if nmb_of_scans != None:
+            for layer in self.layers:
+                layer_settings = []
+                for idx in range(layer.shapes):
+                    layer_settings.append(nmb_of_scans[idx % len(nmb_of_scans)])
+                layer.set_nmb_of_scans(layer_settings)
+
     def create_obps(self):
         for i in range(len(self.layers)):
             self.layers[i].create_obp_elements()
