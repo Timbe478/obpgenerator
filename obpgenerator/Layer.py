@@ -19,6 +19,24 @@ class Layer:
             obp_elements = obp_elements + shape.obp_elements
         return obp_elements
 
+    def export_shape_obp(self,path):
+        layer_path = path[0:-4]
+        self.sort_layers()
+        for i, shape in enumerate(self.shapes_to_export):
+            shape.generate_melt_strategy()
+            shape.generate_obp_elements()
+            path = layer_path + "_" + str(i) + ".obp" 
+            obp.write_obp(shape.obp_elements,path)
+    
+    def export_shape_obpj(self,path):
+        layer_path = path[0:-5]
+        self.sort_layers()
+        for i, shape in enumerate(self.shapes_to_export):
+            shape.generate_melt_strategy()
+            shape.generate_obp_elements()
+            path = layer_path + "_" + str(i) + ".obpj" 
+            obp.write_obpj(shape.obp_elements,path)
+    
     def export_obp(self,path):
         obp_elements = self.create_obp_elements()
         obp.write_obp(obp_elements,path)

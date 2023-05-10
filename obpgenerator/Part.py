@@ -84,7 +84,7 @@ class Part:
         for i in range(len(self.layers)):
             self.layers[i].create_obp_elements()
 
-    def export_build_file(self, folder_path, file_name="freemelt_run_file.yml"):
+    def export_build_file(self, folder_path, file_name="freemelt_run_file.yml", export_shapes_individual=False):
         
         # Create directory to save obp files
         path = os.path.join(folder_path, "obp_files")
@@ -112,8 +112,14 @@ class Part:
         build_file.append("    files:")
         for i in range(len(self.layers)):
             file_path = os.path.join(path, "layer"+str(i)+".obp")
-            self.layers[i].export_obp(file_path)
-            build_file.append("      - \"" + "/obp_files/layer"+str(i)+".obp" + "\"")
+            if export_shapes_individual:
+                build_file.append("      -")
+                self.layers[i].export_shape_obp(file_path)
+                for ii in range(len(self.layers[i].shapes)):
+                    build_file.append("        - \"" + "/obp_files/layer"+str(i)+"_"+str(ii)+".obp" + "\"")
+            else:
+                self.layers[i].export_obp(file_path)
+                build_file.append("      - \"" + "/obp_files/layer"+str(i)+".obp" + "\"")
         build_file.append("  layerfeed:")
         build_file.append("    build_piston_distance: " + str(self.layer_feed.build_piston_distance))
         build_file.append("    powder_piston_distance: " + str(self.layer_feed.powder_piston_distance))
