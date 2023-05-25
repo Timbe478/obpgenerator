@@ -64,19 +64,19 @@ class Part:
         if manufacturing_settings != None:
             for layer in self.layers:
                 layer_settings = []
-                for idx in range(layer.shapes):
+                for idx in range(len(layer.shapes)):
                     layer_settings.append(manufacturing_settings[idx % len(manufacturing_settings)])
                 layer.set_manufacturing_settings(layer_settings)
         if melt_strategies != None:
             for layer in self.layers:
                 layer_settings = []
-                for idx in range(layer.shapes):
+                for idx in range(len(layer.shapes)):
                     layer_settings.append(melt_strategies[idx % len(melt_strategies)])
                 layer.set_melt_strategies(layer_settings)
         if nmb_of_scans != None:
             for layer in self.layers:
                 layer_settings = []
-                for idx in range(layer.shapes):
+                for idx in range(len(layer.shapes)):
                     layer_settings.append(nmb_of_scans[idx % len(nmb_of_scans)])
                 layer.set_nmb_of_scans(layer_settings)
 
