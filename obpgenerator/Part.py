@@ -99,7 +99,7 @@ class Part:
         build_file.append("  start_heat:")
         build_file.append("    file: \"" + self.start_heat.file + "\"")
         build_file.append("    temp_sensor: \"" + self.start_heat.temp_sensor + "\"")
-        build_file.append("    target_temperatur: " + str(self.start_heat.target_temp))
+        build_file.append("    target_temperature: " + str(self.start_heat.target_temp))
         build_file.append("    timeout: " + str(self.start_heat.timeout))
         build_file.append("  preheat:")
         build_file.append("    file: \"" + self.pre_heat.file + "\"")
