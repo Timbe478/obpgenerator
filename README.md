@@ -70,12 +70,12 @@ my_part.create_from_mplt_paths(slices)
 
 #Sets two different manufacturing settings for the two geometries
 settings1 = manufacturing_settings.ManufacturingSetting()
-settings1.set_spot_size(0.5) #[µm]
+settings1.set_spot_size(0.5) #[-]
 settings1.set_beam_power(1000) #[W]
 settings1.set_dwell_time(1) #[ns]
 settings1.set_scan_speed(12) #[micrometers/second] 
 settings2 = manufacturing_settings.ManufacturingSetting()
-settings1.set_spot_size(0.75) #[µm]
+settings1.set_spot_size(0.75) #[-]
 settings1.set_beam_power(1500) #[W]
 settings1.set_dwell_time(1) #[ns]
 settings1.set_scan_speed(10) #[micrometers/second] 
