@@ -101,6 +101,10 @@ class Layer:
             new_shape.paths = path
             self.shapes.append(new_shape)
 
+    def offset_layer(self, offset_factor):
+        for shape in self.shapes:
+            shape.offset_paths(offset_factor)
+
 
 
 

@@ -4,6 +4,8 @@ import obpgenerator.shape_melting as melting
 import obplib as obp
 import obpgenerator.manufacturing_settings as settings
 import obpgenerator.generate_obp as generate_obp
+import obpgenerator.offset_paths as offset_paths
+
 
 def rotate(origin, point, angle):
     """
@@ -97,3 +99,6 @@ class Shape:
             settings = self.melt_settings
         points = melting.melt(self.keep_matrix,self.coord_matrix,strategy,settings=settings)
         self.obp_points = self.obp_points + points
+
+    def offset_paths(self, offset_factor):
+        self.paths = offset_paths.offset_array(self.paths, offset_factor)

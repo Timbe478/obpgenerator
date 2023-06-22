@@ -135,4 +135,8 @@ class Part:
             for line in build_file:
                 file.write(line)
                 file.write('\n')
+
+    def offset_shapes(self, offset_factor):
+        for layer in self.layers:
+            layer.offset_layer(offset_factor)
         

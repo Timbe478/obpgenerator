@@ -7,5 +7,7 @@ from . import (
     Part,
     shape_melting,
     Shape,
-    slicer
+    slicer,
+    offset_paths,
+    Contour
 )
