@@ -7,4 +7,4 @@ class Contour:
         self.melt_strategy = "point_random" # Melting strategy
         self.melt_settings = dict() # Melting settings
         self.nmb_of_scans = 1 # Number of times the Contour should be scanned
-        self.start_angle = 0 # At which angle in each path the scan should start
+        self.start_angle = 0 # At which angle (in degree) in each path the scan should start

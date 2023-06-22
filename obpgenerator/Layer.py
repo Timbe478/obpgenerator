@@ -105,6 +105,10 @@ class Layer:
         for shape in self.shapes:
             shape.offset_paths(offset_factor)
 
+    def generate_contours(self, contour_offset, nmb_of_contour_layers=1, nmb_of_scans = 1, start_angle = 0, melt_strategy = None, melt_settings = None):
+        for shape in self.shapes:
+            shape.generate_contours(contour_offset, nmb_of_contour_layers=nmb_of_contour_layers, nmb_of_scans = nmb_of_scans, start_angle = start_angle, melt_strategy = melt_strategy, melt_settings = melt_settings)
+
 
 
 

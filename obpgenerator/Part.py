@@ -135,6 +135,10 @@ class Part:
             for line in build_file:
                 file.write(line)
                 file.write('\n')
+                
+    def generate_contours(self, contour_offset, nmb_of_contour_layers=1, nmb_of_scans = 1, start_angle = 0, melt_strategy = None, melt_settings = None):
+        for layer in self.layers:
+            layer.generate_contours(contour_offset, nmb_of_contour_layers=nmb_of_contour_layers, nmb_of_scans = nmb_of_scans, start_angle = start_angle, melt_strategy = melt_strategy, melt_settings = melt_settings)
 
     def offset_shapes(self, offset_factor):
         for layer in self.layers:

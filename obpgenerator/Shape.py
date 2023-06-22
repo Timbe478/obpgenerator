@@ -5,7 +5,7 @@ import obplib as obp
 import obpgenerator.manufacturing_settings as settings
 import obpgenerator.generate_obp as generate_obp
 import obpgenerator.offset_paths as offset_paths
-
+import obpgenerator.Contour as Contour
 
 def rotate(origin, point, angle):
     """
@@ -46,6 +46,7 @@ class Shape:
         self.melt_strategy = "point_random" #melting strategy
         self.melt_settings = dict() #melting settings
         self.nmb_of_scans = 1 #number of times the shape should be scanned
+        self.contours = [] #contours to melt
 
     def generate_matrixes(self, spacing, size=150, angle=0): #spacing and size in mm, angle in degree 
         row_height = math.sqrt(3/4)*spacing
@@ -99,6 +100,23 @@ class Shape:
             settings = self.melt_settings
         points = melting.melt(self.keep_matrix,self.coord_matrix,strategy,settings=settings)
         self.obp_points = self.obp_points + points
+
+    def generate_contours(self, contour_offset, nmb_of_contour_layers=1, nmb_of_scans = 1, start_angle = 0, melt_strategy = None, melt_settings = None):
+        for i in range(nmb_of_contour_layers):
+            offset_factor = (i+1)*contour_offset
+            paths = offset_paths.offset_array(self.paths, offset_factor)
+            contour = Contour.Contour()
+            contour.paths = paths
+            contour.nmb_of_scans = nmb_of_scans
+            contour.start_angle = start_angle
+            if melt_strategy is not None:
+                contour.melt_strategy = melt_strategy
+            if melt_settings is not None:
+                contour.melt_settings = melt_settings
+            self.contours.append(contour)
+            
+
+
 
     def offset_paths(self, offset_factor):
         self.paths = offset_paths.offset_array(self.paths, offset_factor)
