@@ -1,5 +1,6 @@
 import pyvista as pv
 from matplotlib.path import Path
+import offset_paths
 
 def find_min_max_z(mesh): #Finds min and max point in the z-direction
       min_value = 0
@@ -94,7 +95,7 @@ def slice_stl_file(stl_string, layer_height):
     return slices
 
 
-def slice_stl(paths,layer_height):
+def slice_stl(paths, layer_height):
     if not type(paths) is list:
         paths = [paths]
     slices = []
