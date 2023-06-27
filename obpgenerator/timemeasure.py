@@ -1,6 +1,6 @@
-import obpgenerator.Part as Part
-import obpgenerator.slicer as slicer
-import obpgenerator.manufacturing_settings as manufacturing_settings
+import Part as Part
+import slicer as slicer
+import manufacturing_settings as manufacturing_settings
 
 
 stl_files = ["examples\\cube1.stl", "examples\\cube2.stl"]

@@ -54,7 +54,6 @@ class Shape:
         points_y = math.floor(size/row_height)
         self.coord_matrix = np.zeros((points_y, points_x),dtype=np.complex_)
         self.keep_matrix = np.zeros((points_y, points_x))
-        
         for i in range(points_x):
             for ii in range(points_y):
                 if (ii % 2) == 0:
