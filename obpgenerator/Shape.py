@@ -4,7 +4,7 @@ import obpgenerator.shape_melting as melting
 import obplib as obp
 import obpgenerator.manufacturing_settings as settings
 import obpgenerator.generate_obp as generate_obp
-import obpgenerator.offset_paths as offset_paths
+import obpgenerator.support_functions.offset_paths as offset_paths
 import obpgenerator.Contour as Contour
 
 def rotate(origin, point, angle):

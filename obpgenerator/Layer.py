@@ -1,6 +1,6 @@
 import obpgenerator.layer_sorting as sorting
 import obplib as obp
-import Shape as Shape
+import obpgenerator.Shape as Shape
 import numpy as np
 
 class Layer:

@@ -1,5 +1,4 @@
 from . import (
-    file_import,
     generate_obp,
     layer_sorting,
     Layer,
@@ -7,7 +6,5 @@ from . import (
     Part,
     shape_melting,
     Shape,
-    slicer,
-    offset_paths,
     Contour
 )

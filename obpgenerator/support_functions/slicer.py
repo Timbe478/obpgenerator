@@ -1,6 +1,6 @@
 import pyvista as pv
 from matplotlib.path import Path
-import offset_paths
+import obpgenerator.support_functions.offset_paths as offset_paths
 
 def find_min_max_z(mesh): #Finds min and max point in the z-direction
       min_value = 0
