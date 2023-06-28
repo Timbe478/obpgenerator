@@ -1,5 +1,5 @@
 import obpgenerator.Part as Part
-import obpgenerator.slicer as slicer
+import obpgenerator.support_functions.slicer as slicer
 import obpgenerator.manufacturing_settings as manufacturing_settings
 
 
