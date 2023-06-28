@@ -6,6 +6,7 @@ import obpgenerator.manufacturing_settings as settings
 import obpgenerator.generate_obp as generate_obp
 import obpgenerator.support_functions.offset_paths as offset_paths
 import obpgenerator.Contour as Contour
+import obpgenerator.support_functions.generate_coordinates as generate_coordinates
 
 def rotate(origin, point, angle):
     """
@@ -48,27 +49,11 @@ class Shape:
         self.nmb_of_scans = 1 #number of times the shape should be scanned
         self.contours = [] #contours to melt
 
-    def generate_matrixes(self, spacing, size=150, angle=0): #spacing and size in mm, angle in degree 
-        row_height = math.sqrt(3/4)*spacing
-        points_x = math.floor(size/spacing)
-        points_y = math.floor(size/row_height)
-        self.coord_matrix = np.zeros((points_y, points_x),dtype=np.complex_)
-        self.keep_matrix = np.zeros((points_y, points_x))
-        for i in range(points_x):
-            for ii in range(points_y):
-                if (ii % 2) == 0:
-                    x = i*spacing - size/2
-                    y = ii*row_height - size/2
-                    if angle != 0:
-                        x,y = rotate((0,0),(x,y),angle)
-                    self.coord_matrix[ii][i] = complex(x,y)
-                else:
-                    x = i*spacing - size/2 + spacing/2
-                    y = ii*row_height - size/2
-                    if angle != 0:
-                        x,y = rotate((0,0),(x,y),angle)
-                    self.coord_matrix[ii][i] = complex(x,y)
-    
+    def generate_matrixes(self, spacing, size=150, angle=0): #spacing and size in mm, angle in degree
+        coord_matrix, keep_matrix = generate_coordinates.generate_matrices(spacing, size=size, angle=angle)
+        self.coord_matrix = coord_matrix
+        self.keep_matrix = keep_matrix
+
     def check_keep_matrix(self):
         if len(self.paths)>0:
             flatten_keep = self.coord_matrix.flatten()
