@@ -23,4 +23,4 @@ settings1.set_scan_speed(10) #[micrometers/second]
 
 my_part.set_layers(0.07, settings1, size=100, angle_between_layers=10, melt_strategy="point_random", nmb_of_scans=1, sorting_strategy="shapes_first") #First we just set one manufacturing setting
 my_part.set_settings(manufacturing_settings = [settings1, settings2], melt_strategies=["line_snake","point_random"]) #We can then set different settings for the seperate geometries
-my_part.export_build_file(r"C:\Users\antwi87\Downloads\obp_files", export_shapes_individual=False) #Exports the build file (each layer will be one obp file, if export_shapes_individual=True each geoemtry will be in seperate obp files)
+my_part.export_build_file(r"C:\Users\antwi87\Downloads\obptest", export_shapes_individual=False) #Exports the build file (each layer will be one obp file, if export_shapes_individual=True each geoemtry will be in seperate obp files)
